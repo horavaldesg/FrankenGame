@@ -17,6 +17,7 @@ public class Piston : MonoBehaviour
         PistonController.SelectPiston += SelectPiston;
         PistonController.ExtendPiston += ExtendPiston;
         PistonController.RetractPiston += RetractPiston;
+        PistonController.ResetPiston += ResetPiston;
         HandCollision.ResetPiston += ResetPiston;
     }
     private void OnDisable()
@@ -24,6 +25,7 @@ public class Piston : MonoBehaviour
         PistonController.SelectPiston -= SelectPiston;
         PistonController.ExtendPiston -= ExtendPiston;
         PistonController.RetractPiston -= RetractPiston;
+        PistonController.ResetPiston -= ResetPiston;
         HandCollision.ResetPiston -= ResetPiston;
     }
 

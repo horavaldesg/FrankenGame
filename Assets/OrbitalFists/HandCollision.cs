@@ -8,7 +8,9 @@ using System;
 public class HandCollision : MonoBehaviour
 {
     public static event Action<GameObject> Respawn;
-    public static event Action<bool> ResetPiston;
+    public static event Action<bool> ResetPiston; 
+    public static event Action<int> UpdateDeaths;
+  
 
     public float score;
     public Text scoreText;
@@ -25,6 +27,7 @@ public class HandCollision : MonoBehaviour
             //GameOver
             ResetPiston.Invoke(true);
             Respawn.Invoke(collision.collider.transform.parent.gameObject);
+            UpdateDeaths.Invoke(1);
         }
     }
 }
