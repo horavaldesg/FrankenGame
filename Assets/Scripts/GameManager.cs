@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Start") return;
         if(SceneManager.GetActiveScene().name == "FrankenGame")
         {
             score.floatValue = 0;
@@ -48,15 +49,16 @@ public class GameManager : MonoBehaviour
     {
         HandCollision.UpdateDeaths += UpdateDeathsText;
         PistonController.UpdateScore += UpdateScoreText;
-        PistonController.LoadEndScene += LoadEndScene;
-
+        PistonController.LoadEndScene += LoadScene;
+        HandCollision.LoadEndScene += LoadScene;
     }
 
     private void OnDisable()
     {
         HandCollision.UpdateDeaths -= UpdateDeathsText;
         PistonController.UpdateScore -= UpdateScoreText;
-        PistonController.LoadEndScene -= LoadEndScene;
+        PistonController.LoadEndScene -= LoadScene;
+        HandCollision.LoadEndScene -= LoadScene;
 
 
     }
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateHighScoreText(float score)
     {
-        if (score < highScore.floatValue)
+        if (score < highScore.floatValue || highScore.floatValue == 0)
         {
             Debug.Log(highScore.floatValue);
             highScore.floatValue = score;
@@ -88,13 +90,13 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void LoadEndScene(bool state)
+    public void LoadScene(string sceneName)
     {
-        if (state)
-        {
-            UpdateHighScoreText(score.floatValue);
-            SceneManager.LoadScene("EndScreen");
-        }
+        SceneManager.LoadScene(sceneName);
+        if (SceneManager.GetActiveScene().name == "Start") return;
+        UpdateHighScoreText(score.floatValue);
+        
+
 
     }
 }
