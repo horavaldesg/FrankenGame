@@ -24,13 +24,16 @@ public class HandCollision : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.collider.gameObject.CompareTag("Player"))
         {
-            if (collision.gameObject.GetComponentInParent<Piston>().CanKill) return;
-            //GameOver
-            ResetPiston.Invoke(true);
-            Respawn.Invoke(collision.collider.transform.parent.gameObject);
-            UpdateDeaths.Invoke(1);
+
+            if (!collision.collider.gameObject.GetComponent<Piston>().CanKill)
+            {
+                //GameOver
+                ResetPiston.Invoke(true);
+                Respawn.Invoke(collision.collider.transform.parent.gameObject);
+                UpdateDeaths.Invoke(1);
+            }
         }
     }
 

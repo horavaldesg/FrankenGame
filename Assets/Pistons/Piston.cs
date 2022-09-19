@@ -67,7 +67,7 @@ public class Piston : MonoBehaviour
         {
             if (collision.collider.CompareTag("Enemy"))
             {
-                Destroy(collision.gameObject.transform.parent.gameObject);
+                Destroy(collision.gameObject);
             }
         }
     }
