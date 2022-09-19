@@ -9,7 +9,7 @@ public class Piston : MonoBehaviour
     [SerializeField, Tooltip("Key used to select this piston")] private KeyCode selectKey;
     [SerializeField] private float _minLength, _maxLength, _extendSpeed, _retractSpeed;
     [SerializeField] private Color _activeColor, _defaultColor;
-    [SerializeField] private bool CanKill;
+    public bool CanKill;
 
     private SpriteRenderer _sr;
     private void Start() => _sr = GetComponent<SpriteRenderer>();

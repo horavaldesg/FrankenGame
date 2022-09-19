@@ -26,6 +26,7 @@ public class HandCollision : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
+            if (collision.gameObject.GetComponentInParent<Piston>().CanKill) return;
             //GameOver
             ResetPiston.Invoke(true);
             Respawn.Invoke(collision.collider.transform.parent.gameObject);
