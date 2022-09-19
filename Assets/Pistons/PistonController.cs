@@ -12,6 +12,8 @@ public class PistonController : MonoBehaviour
     public static event Action<bool> ResetPiston;
     public static event Action<string> LoadEndScene;
     public static event Action<float> UpdateScore;
+    public static event Action<GameObject> Respawn;
+
     [SerializeField] private RectTransform boostBar;
 
     private Rigidbody2D rb;
@@ -31,6 +33,8 @@ public class PistonController : MonoBehaviour
         if (Input.GetMouseButton(0)) ExtendPiston.Invoke(currentKey); //extend pistons with LMB
         if (Input.GetMouseButton(1)) RetractPiston.Invoke(currentKey); //retract pistons with RMB
         if (Input.GetKeyDown(KeyCode.Space)) ResetPiston.Invoke(true);
+
+        if (Input.GetKeyDown(KeyCode.Escape)) Respawn.Invoke(this.gameObject);
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && boost)
         {

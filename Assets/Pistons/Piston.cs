@@ -9,6 +9,7 @@ public class Piston : MonoBehaviour
     [SerializeField, Tooltip("Key used to select this piston")] private KeyCode selectKey;
     [SerializeField] private float _minLength, _maxLength, _extendSpeed, _retractSpeed;
     [SerializeField] private Color _activeColor, _defaultColor;
+    [SerializeField] private bool CanKill;
 
     private SpriteRenderer _sr;
     private void Start() => _sr = GetComponent<SpriteRenderer>();
@@ -60,5 +61,16 @@ public class Piston : MonoBehaviour
         }
     }
 
-    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (CanKill)
+        {
+            if (collision.collider.CompareTag("Enemy"))
+            {
+                Destroy(collision.gameObject.transform.parent.gameObject);
+            }
+        }
+    }
+
+
 }
